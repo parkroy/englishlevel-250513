@@ -20,6 +20,7 @@ const Index = () => {
   const [quizAnswers, setQuizAnswers] = useState<number[]>([]);
   const [selfAssessedLevel, setSelfAssessedLevel] = useState<string | null>(null);
   const [quizScore, setQuizScore] = useState(0);
+  const [resultLevel, setResultLevel] = useState<any>(null);
 
   // Handle start of quiz
   const handleStartQuiz = (selfAssessedLevel: string | null) => {
@@ -48,6 +49,10 @@ const Index = () => {
     setQuizAnswers(answers);
     setQuizScore(score);
     
+    // Set result level
+    const level = getResultLevel(score);
+    setResultLevel(level);
+    
     // Move to user info state
     setAppState('userInfo');
   };
@@ -71,7 +76,7 @@ const Index = () => {
       questions_presented: quizQuestions,
       user_answers: quizAnswers,
       score: quizScore,
-      calculated_age_level: getResultLevel(quizScore).age_level,
+      calculated_age_level: resultLevel.age_level,
       completion_timestamp: new Date(),
       gemini_analysis_result: getMockAnalysis(quizScore)
     };
@@ -108,6 +113,7 @@ const Index = () => {
     setCurrentAttempt(null);
     setQuizAnswers([]);
     setQuizScore(0);
+    setResultLevel(null);
   };
 
   // Render based on app state
@@ -122,11 +128,11 @@ const Index = () => {
                 onSubmit={handleUserInfoSubmit} 
                 score={quizScore}
                 totalQuestions={quizQuestions.length}
+                resultLevel={resultLevel}
               />;
       case 'result':
         if (!currentAttempt) return <div>Loading results...</div>;
         
-        const resultLevel = getResultLevel(currentAttempt.score);
         const previousAge = currentUser && currentUser.result_history.length > 1 
           ? currentUser.result_history[currentUser.result_history.length - 2].calculated_age_level 
           : undefined;
