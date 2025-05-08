@@ -2,12 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import StartPage from '../components/StartPage';
 import QuizPage from '../components/QuizPage';
+import UserInfoForm from '../components/UserInfoForm';
 import ResultPage from '../components/ResultPage';
 import { User, QuizAttempt, Question } from '../data/types';
 import { getRandomQuestions, getResultLevel, getMockAnalysis, badges } from '../data/mockData';
 
 // App state type
-type AppState = 'start' | 'quiz' | 'result';
+type AppState = 'start' | 'quiz' | 'userInfo' | 'result';
 
 const Index = () => {
   // App state
@@ -16,19 +17,13 @@ const Index = () => {
   const [quizQuestions, setQuizQuestions] = useState<Question[]>([]);
   const [currentAttempt, setCurrentAttempt] = useState<QuizAttempt | null>(null);
   const [userCount, setUserCount] = useState(238); // Mock user count, would be from database in real implementation
+  const [quizAnswers, setQuizAnswers] = useState<number[]>([]);
+  const [selfAssessedLevel, setSelfAssessedLevel] = useState<string | null>(null);
+  const [quizScore, setQuizScore] = useState(0);
 
   // Handle start of quiz
-  const handleStartQuiz = (email: string, selfAssessedLevel: string | null) => {
-    // Create user or load existing
-    const user: User = {
-      email,
-      self_assessed_level: selfAssessedLevel || undefined,
-      result_history: [],
-      badges_earned: [],
-      email_consent: true
-    };
-    
-    setCurrentUser(user);
+  const handleStartQuiz = (selfAssessedLevel: string | null) => {
+    setSelfAssessedLevel(selfAssessedLevel);
     
     // Get random questions
     const questions = getRandomQuestions(7);
@@ -40,7 +35,7 @@ const Index = () => {
 
   // Handle quiz completion
   const handleQuizComplete = (answers: number[]) => {
-    if (!currentUser || quizQuestions.length === 0) return;
+    if (quizQuestions.length === 0) return;
     
     // Calculate score
     let score = 0;
@@ -50,30 +45,50 @@ const Index = () => {
       }
     }
     
+    setQuizAnswers(answers);
+    setQuizScore(score);
+    
+    // Move to user info state
+    setAppState('userInfo');
+  };
+
+  // Handle user info submission
+  const handleUserInfoSubmit = (name: string, email: string) => {
+    // Create user
+    const user: User = {
+      email,
+      self_assessed_level: selfAssessedLevel || undefined,
+      result_history: [],
+      badges_earned: [],
+      email_consent: true
+    };
+    
+    setCurrentUser(user);
+    
     // Create attempt record
     const attempt: QuizAttempt = {
-      user_email: currentUser.email,
+      user_email: email,
       questions_presented: quizQuestions,
-      user_answers: answers,
-      score,
-      calculated_age_level: getResultLevel(score).age_level,
+      user_answers: quizAnswers,
+      score: quizScore,
+      calculated_age_level: getResultLevel(quizScore).age_level,
       completion_timestamp: new Date(),
-      gemini_analysis_result: getMockAnalysis(score)
+      gemini_analysis_result: getMockAnalysis(quizScore)
     };
     
     setCurrentAttempt(attempt);
     
     // Add badges
-    const newBadges = [...currentUser.badges_earned];
+    const newBadges = [...user.badges_earned];
     if (!newBadges.includes('첫 진단 완료!')) {
       newBadges.push('첫 진단 완료!');
     }
     
     // Update user
     const updatedUser = {
-      ...currentUser,
+      ...user,
       latest_result: attempt,
-      result_history: [...currentUser.result_history, attempt],
+      result_history: [...user.result_history, attempt],
       badges_earned: newBadges
     };
     
@@ -91,6 +106,8 @@ const Index = () => {
     setAppState('start');
     setQuizQuestions([]);
     setCurrentAttempt(null);
+    setQuizAnswers([]);
+    setQuizScore(0);
   };
 
   // Render based on app state
@@ -100,6 +117,12 @@ const Index = () => {
         return <StartPage onStart={handleStartQuiz} userCount={userCount} />;
       case 'quiz':
         return <QuizPage questions={quizQuestions} onComplete={handleQuizComplete} />;
+      case 'userInfo':
+        return <UserInfoForm 
+                onSubmit={handleUserInfoSubmit} 
+                score={quizScore}
+                totalQuestions={quizQuestions.length}
+              />;
       case 'result':
         if (!currentAttempt) return <div>Loading results...</div>;
         

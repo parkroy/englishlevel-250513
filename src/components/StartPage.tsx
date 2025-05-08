@@ -1,42 +1,23 @@
 
 import React, { useState } from 'react';
 import { Button } from '../components/ui/button';
-import { Input } from '../components/ui/input';
 import { useToast } from '../hooks/use-toast';
 
 interface StartPageProps {
-  onStart: (email: string, selfAssessedLevel: string | null) => void;
+  onStart: (selfAssessedLevel: string | null) => void;
   userCount: number;
 }
 
 const StartPage: React.FC<StartPageProps> = ({ onStart, userCount }) => {
-  const [email, setEmail] = useState('');
   const [selfAssessedLevel, setSelfAssessedLevel] = useState<string | null>(null);
-  const [emailError, setEmailError] = useState('');
   const { toast } = useToast();
-  
-  const validateEmail = (email: string): boolean => {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-  };
 
   const handleStart = () => {
-    if (!email) {
-      setEmailError('이메일을 입력해주세요.');
-      return;
-    }
-    
-    if (!validateEmail(email)) {
-      setEmailError('유효한 이메일을 입력해주세요.');
-      return;
-    }
-    
-    setEmailError('');
     toast({
       title: "테스트를 시작합니다!",
       description: "7개의 질문에 답해주세요.",
     });
-    onStart(email, selfAssessedLevel);
+    onStart(selfAssessedLevel);
   };
 
   return (
@@ -85,20 +66,6 @@ const StartPage: React.FC<StartPageProps> = ({ onStart, userCount }) => {
               자신 없음
             </Button>
           </div>
-        </div>
-
-        <div className="mb-6">
-          <label className="block text-sm font-medium mb-2">
-            결과 확인 및 맞춤 팁을 받을 이메일을 입력하세요.
-          </label>
-          <Input 
-            type="email" 
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="your.email@example.com"
-            className={emailError ? "border-red-500" : ""}
-          />
-          {emailError && <p className="text-red-500 text-sm mt-1">{emailError}</p>}
         </div>
 
         <Button 
