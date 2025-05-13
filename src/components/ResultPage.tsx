@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '../components/ui/button';
 import { Badge, ResultLevel, QuizAttempt } from '../data/types';
@@ -222,7 +221,7 @@ const ResultPage: React.FC<ResultPageProps> = ({
         
         {/* Footer */}
         <div className="px-6 py-4 bg-gray-50 text-xs text-center text-gray-500">
-          <p>© 2023 카톡영어 | <a href="#" className="underline">개인정보처리방침</a></p>
+          <p>© 2025 스피커블 | <a href="#" className="underline">개인정보처리방침</a></p>
         </div>
       </div>
     </div>

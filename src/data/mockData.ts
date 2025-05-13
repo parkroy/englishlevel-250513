@@ -4,145 +4,176 @@ import { Question, ResultLevel, Badge } from './types';
 export const questions: Question[] = [
   {
     id: "q1",
-    question_text: "Which sentence sounds most natural?",
+    question_text: "Choose the correct sentence: A) They is happy. B) They are happy. C) They am happy. D) They be happy.",
     options: [
-      "I am go to the store yesterday.",
-      "I went to the store yesterday.",
-      "I going to the store yesterday.",
-      "I did go to the store yesterday."
+      "A) They is happy.",
+      "B) They are happy.",
+      "C) They am happy.",
+      "D) They be happy."
     ],
     correct_option_index: 1,
     difficulty: 1,
-    category: "Grammar-Tense",
-    explanation: "The simple past tense is used for actions completed in the past."
+    category: "문법-be동사",
+    explanation: "They는 복수 주어이므로 be동사는 are를 사용합니다."
   },
   {
     id: "q2",
-    question_text: "What would you say when meeting someone for the first time?",
+    question_text: "Which sentence is correct? A) She sing well. B) She sings well. C) She singing well. D) She is sing well.",
     options: [
-      "Nice to meet you!",
-      "I know you!",
-      "What is your purpose?",
-      "We meet finally!"
+      "A) She sing well.",
+      "B) She sings well.",
+      "C) She singing well.",
+      "D) She is sing well."
     ],
-    correct_option_index: 0,
+    correct_option_index: 1,
     difficulty: 1,
-    category: "Situational-Greeting",
-    explanation: "When meeting someone for the first time, 'Nice to meet you!' is the most natural greeting."
+    category: "문법-일반동사",
+    explanation: "3인칭 단수 주어(she)와 함께 일반동사는 -s를 붙입니다."
   },
   {
     id: "q3",
-    question_text: "Choose the correct sentence:",
+    question_text: "What do you say when you meet someone for the first time? A) Goodbye! B) How are you? C) Nice to meet you! D) See you later!",
     options: [
-      "She have three cats.",
-      "She has three cat.",
-      "She has three cats.",
-      "She having three cats."
+      "A) Goodbye!",
+      "B) How are you?",
+      "C) Nice to meet you!",
+      "D) See you later!"
     ],
     correct_option_index: 2,
     difficulty: 1,
-    category: "Grammar-Agreement",
-    explanation: "For third-person singular (she), we use 'has' and the plural noun 'cats'."
+    category: "어휘-기본표현",
+    explanation: "처음 만났을 때는 'Nice to meet you!'라고 합니다."
   },
   {
     id: "q4",
-    question_text: "What does the idiom 'break a leg' mean?",
+    question_text: "Complete the sentence: ___ is my book. A) This B) That C) These D) Those",
     options: [
-      "Actually injure your leg",
-      "Run away fast",
-      "Good luck",
-      "Take a break"
+      "A) This",
+      "B) That",
+      "C) These",
+      "D) Those"
     ],
-    correct_option_index: 2,
-    difficulty: 2,
-    category: "Vocabulary-Idiom",
-    explanation: "'Break a leg' is an idiom used to wish someone good luck, especially before a performance."
+    correct_option_index: 0,
+    difficulty: 1,
+    category: "어휘-지시사",
+    explanation: "단수 명사(book)와 가까이 있는 것을 가리킬 때는 'This'를 사용합니다."
   },
   {
     id: "q5",
-    question_text: "How would you ask for the price?",
+    question_text: "Which is correct? A) one apple B) a apples C) an apples D) two apple",
     options: [
-      "How many money is this?",
-      "How much is this?",
-      "What costs it?",
-      "This is how much?"
+      "A) one apple",
+      "B) a apples",
+      "C) an apples",
+      "D) two apple"
     ],
-    correct_option_index: 1,
+    correct_option_index: 0,
     difficulty: 1,
-    category: "Situational-Shopping",
-    explanation: "When asking about price, 'How much is this?' is the correct phrase."
+    category: "어휘-개수",
+    explanation: "하나의 셀 수 있는 명사는 'one apple'로 표현합니다."
   },
   {
     id: "q6",
-    question_text: "Which sentence uses the preposition correctly?",
+    question_text: "다음을 영어로 바르게 표현한 것은? '이것은 나의 책이다.'",
     options: [
-      "I'm afraid of heights.",
-      "I'm afraid from heights.",
-      "I'm afraid at heights.",
-      "I'm afraid by heights."
+      "A) This is I book.",
+      "B) This is me book.",
+      "C) This is my book.",
+      "D) This is mine book."
     ],
-    correct_option_index: 0,
-    difficulty: 2,
-    category: "Grammar-Preposition",
-    explanation: "The correct preposition to use with 'afraid' is 'of'."
+    correct_option_index: 2,
+    difficulty: 1,
+    category: "문법-인칭대명사",
+    explanation: "소유격은 'my'를 사용합니다."
   },
   {
     id: "q7",
-    question_text: "What would you say if someone asks 'How are you?'",
+    question_text: "다음을 영어로 바르게 표현한 것은? '테이블 위에 사과들이 있다.'",
     options: [
-      "I am 30 years old.",
-      "I am engineer.",
-      "I'm doing well, thank you!",
-      "Yes, I am."
+      "A) There is apples on the table.",
+      "B) There are apples on the table.",
+      "C) There are apple on the table.",
+      "D) There is apple on the table."
     ],
-    correct_option_index: 2,
+    correct_option_index: 1,
     difficulty: 1,
-    category: "Situational-Greeting",
-    explanation: "'How are you?' asks about your current state or feelings, not your age or profession."
+    category: "문법-복수형",
+    explanation: "복수 명사(apples)와 함께 'There are'를 사용합니다."
   },
   {
     id: "q8",
-    question_text: "Which word is NOT a synonym for 'happy'?",
+    question_text: "다음을 영어로 바르게 표현한 것은? '나는 매일 아침 커피를 마신다.'",
     options: [
-      "Joyful",
-      "Delighted",
-      "Miserable",
-      "Cheerful"
+      "A) I drink coffee every morning.",
+      "B) I drinking coffee every morning.",
+      "C) I am drink coffee every morning.",
+      "D) I coffee drink every morning."
     ],
-    correct_option_index: 2,
-    difficulty: 2,
-    category: "Vocabulary-Synonyms",
-    explanation: "'Miserable' means extremely unhappy or uncomfortable, while the others mean happy."
+    correct_option_index: 0,
+    difficulty: 1,
+    category: "문법-일반동사",
+    explanation: "현재 습관을 나타낼 때 일반동사 현재형을 사용합니다."
   },
   {
     id: "q9",
-    question_text: "Choose the correct past tense form:",
+    question_text: "다음을 영어로 바르게 표현한 것은? '지금 몇 시입니까?'",
     options: [
-      "I eated the cake.",
-      "I ate the cake.",
-      "I was eating the cake.",
-      "I eat the cake."
+      "A) What is time now?",
+      "B) What time it is now?",
+      "C) What time is it?",
+      "D) What time is now?"
     ],
-    correct_option_index: 1,
+    correct_option_index: 2,
     difficulty: 1,
-    category: "Grammar-Tense",
-    explanation: "The correct irregular past tense form of 'eat' is 'ate'."
+    category: "어휘-시간",
+    explanation: "시간을 물을 때는 'What time is it?'이라고 합니다."
   },
   {
     id: "q10",
-    question_text: "What's the best response to 'Thank you'?",
+    question_text: "다음을 영어로 바르게 표현한 것은? '나는 학교에 간다.'",
     options: [
-      "Welcome.",
-      "You're welcome.",
-      "It's welcoming.",
-      "The welcome is yours."
+      "A) I go to school.",
+      "B) I go at school.",
+      "C) I go in school.",
+      "D) I school go."
+    ],
+    correct_option_index: 0,
+    difficulty: 1,
+    category: "어휘-장소",
+    explanation: "장소를 나타내는 전치사로 'to'를 사용합니다."
+  },
+  {
+    id: "q11",
+    question_text: "We ___ to the beach last weekend.",
+    options: [
+      "A) go",
+      "B) went",
+      "C) are going",
+      "D) will go"
     ],
     correct_option_index: 1,
-    difficulty: 1,
-    category: "Situational-Politeness",
-    explanation: "The natural response to 'Thank you' is 'You're welcome.'"
+    difficulty: 2,
+    category: "문법-시제",
+    explanation: "과거 시제는 'went'를 사용합니다."
+  },
+  {
+    id: "q12",
+    question_text: "They ___ dinner when the phone rang.",
+    options: [
+      "A) eat",
+      "B) ate",
+      "C) were eating",
+      "D) will eat"
+    ],
+    correct_option_index: 2,
+    difficulty: 2,
+    category: "문법-시제",
+    explanation: "과거 진행형으로 'were eating'을 사용합니다."
   }
 ];
+
+// Only include the first 20 entries from the questions array for the mockQuestions
+export const mockQuestions = questions.slice(0, 20);
 
 export const resultLevels: ResultLevel[] = [
   {

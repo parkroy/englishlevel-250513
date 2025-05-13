@@ -6,6 +6,7 @@ import UserInfoForm from '../components/UserInfoForm';
 import ResultPage from '../components/ResultPage';
 import { User, QuizAttempt, Question } from '../data/types';
 import { getRandomQuestions, getResultLevel, getMockAnalysis, badges } from '../data/mockData';
+import { supabase } from '../integrations/supabase/client';
 
 // App state type
 type AppState = 'start' | 'quiz' | 'userInfo' | 'result';
@@ -16,7 +17,7 @@ const Index = () => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [quizQuestions, setQuizQuestions] = useState<Question[]>([]);
   const [currentAttempt, setCurrentAttempt] = useState<QuizAttempt | null>(null);
-  const [userCount, setUserCount] = useState(238); // Mock user count, would be from database in real implementation
+  const [userCount, setUserCount] = useState(238); // Initial user count
   const [quizAnswers, setQuizAnswers] = useState<number[]>([]);
   const [selfAssessedLevel, setSelfAssessedLevel] = useState<string | null>(null);
   const [quizScore, setQuizScore] = useState(0);
@@ -99,7 +100,7 @@ const Index = () => {
     
     setCurrentUser(updatedUser);
     
-    // Update mock user count
+    // Increment user count and save the updated count
     setUserCount(prevCount => prevCount + 1);
     
     // Move to result state

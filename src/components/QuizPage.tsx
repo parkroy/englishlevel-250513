@@ -12,7 +12,7 @@ const QuizPage: React.FC<QuizPageProps> = ({ questions, onComplete }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [userAnswers, setUserAnswers] = useState<number[]>(new Array(questions.length).fill(-1));
-  const [timeLeft, setTimeLeft] = useState(30);
+  const [timeLeft, setTimeLeft] = useState(20);
   const [timerActive, setTimerActive] = useState(true);
 
   const currentQuestion = questions[currentQuestionIndex];
@@ -21,7 +21,7 @@ const QuizPage: React.FC<QuizPageProps> = ({ questions, onComplete }) => {
   useEffect(() => {
     setSelectedOption(null);
     if (timerActive) {
-      setTimeLeft(30);
+      setTimeLeft(20);
       const timer = setInterval(() => {
         setTimeLeft((prevTime) => {
           if (prevTime <= 1) {
@@ -63,6 +63,17 @@ const QuizPage: React.FC<QuizPageProps> = ({ questions, onComplete }) => {
     setTimerActive(!timerActive);
   };
 
+  // Set timer circle color based on time remaining
+  const getTimerColor = () => {
+    if (timeLeft <= 10) {
+      // Calculate a gradient from yellow to red as time decreases from 10 to 0
+      const redIntensity = 255; // Red stays at 255
+      const greenIntensity = Math.round((timeLeft / 10) * 255); // Green goes from 255 to 0
+      return `rgb(${redIntensity}, ${greenIntensity}, 0)`;
+    }
+    return 'rgb(79, 70, 229)'; // Default color (primary)
+  };
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-bgLight p-4 animate-fade-in">
       <div className="max-w-md w-full bg-white rounded-2xl p-6 shadow-lg">
@@ -70,7 +81,10 @@ const QuizPage: React.FC<QuizPageProps> = ({ questions, onComplete }) => {
           <p className="font-medium text-gray-700">질문 {currentQuestionIndex + 1}/{questions.length}</p>
           {timerActive && (
             <div className="flex items-center">
-              <div className="h-6 w-6 flex items-center justify-center rounded-full bg-primary text-white mr-1">
+              <div 
+                className="h-6 w-6 flex items-center justify-center rounded-full text-white mr-1"
+                style={{ backgroundColor: getTimerColor() }}
+              >
                 <span className="text-sm">{timeLeft}</span>
               </div>
               <span className="text-sm">초</span>

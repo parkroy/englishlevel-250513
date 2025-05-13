@@ -121,7 +121,7 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({ onSubmit, score, totalQuest
         </Button>
         
         <div className="mt-4 text-xs text-gray-500 text-center">
-          <p>© 2023 카톡영어 | <a href="#" className="underline">개인정보처리방침</a></p>
+          <p>© 2025 스피커블 | <a href="#" className="underline">개인정보처리방침</a></p>
         </div>
       </div>
     </div>
