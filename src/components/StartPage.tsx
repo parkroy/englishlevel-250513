@@ -59,11 +59,11 @@ const StartPage: React.FC<StartPageProps> = ({ onStart, userCount }) => {
               초급
             </Button>
             <Button 
-              onClick={() => setSelfAssessedLevel('자신 없음')}
-              variant={selfAssessedLevel === '자신 없음' ? 'default' : 'outline'}
+              onClick={() => setSelfAssessedLevel('중급')}
+              variant={selfAssessedLevel === '중급' ? 'default' : 'outline'}
               className="flex-1"
             >
-              자신 없음
+              중급
             </Button>
           </div>
         </div>

@@ -1,7 +1,8 @@
+
 import React, { useState } from 'react';
 import { Button } from '../components/ui/button';
 import { Badge, ResultLevel, QuizAttempt } from '../data/types';
-import { toast } from '../hooks/use-toast';
+import { useToast } from '../hooks/use-toast';
 
 interface ResultPageProps {
   result: QuizAttempt;
@@ -21,17 +22,41 @@ const ResultPage: React.FC<ResultPageProps> = ({
   analysisResult
 }) => {
   const [feedbackGiven, setFeedbackGiven] = useState<boolean | null>(null);
+  const [showFeedback, setShowFeedback] = useState(true);
+  const { toast } = useToast();
 
-  const handleShare = () => {
-    // In a real implementation, this would open a social share dialog
-    toast({
-      title: "공유하기",
-      description: "소셜 미디어에 결과가 공유되었습니다!",
-    });
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: '영어 나이 테스트 결과',
+          text: `내 영어 나이는 ${resultLevel.age_level}살! 당신의 영어 나이도 확인해보세요!`,
+          url: window.location.href,
+        });
+        toast({
+          title: "공유하기",
+          description: "결과가 공유되었습니다!",
+        });
+      } catch (error) {
+        console.error('공유하기 실패:', error);
+        toast({
+          title: "공유하기",
+          description: "공유에 실패했습니다. 다시 시도해주세요.",
+          variant: "destructive",
+        });
+      }
+    } else {
+      // 모바일이 아니거나 공유 API가 지원되지 않는 경우
+      toast({
+        title: "공유하기",
+        description: "이 기기에서는 공유가 지원되지 않습니다.",
+      });
+    }
   };
 
   const handleFeedback = (isPositive: boolean) => {
     setFeedbackGiven(isPositive);
+    setShowFeedback(false);
     toast({
       title: "피드백 감사합니다!",
       description: isPositive ? "소중한 의견 감사합니다!" : "더 나은 서비스로 발전하겠습니다.",
@@ -180,25 +205,31 @@ const ResultPage: React.FC<ResultPageProps> = ({
           
           {/* Feedback and share */}
           <div className="space-y-4">
-            <div className="text-center mb-2">
-              <p className="mb-2 font-medium">진단 결과, 도움이 되셨나요?</p>
-              <div className="flex justify-center gap-4">
-                <Button 
-                  variant={feedbackGiven === true ? "default" : "outline"}
-                  onClick={() => handleFeedback(true)}
-                  className="px-6"
-                >
-                  👍 네!
-                </Button>
-                <Button 
-                  variant={feedbackGiven === false ? "default" : "outline"}
-                  onClick={() => handleFeedback(false)}
-                  className="px-6"
-                >
-                  👎 아니요
-                </Button>
+            {showFeedback ? (
+              <div className="text-center mb-2">
+                <p className="mb-2 font-medium">진단 결과, 도움이 되셨나요?</p>
+                <div className="flex justify-center gap-4">
+                  <Button 
+                    variant="outline"
+                    onClick={() => handleFeedback(true)}
+                    className="px-6"
+                  >
+                    👍 네!
+                  </Button>
+                  <Button 
+                    variant="outline"
+                    onClick={() => handleFeedback(false)}
+                    className="px-6"
+                  >
+                    👎 아니요
+                  </Button>
+                </div>
               </div>
-            </div>
+            ) : (
+              <div className="text-center mb-2 p-3 bg-green-50 rounded-lg">
+                <p className="text-green-700">피드백 감사합니다! 더 나은 서비스로 보답하겠습니다.</p>
+              </div>
+            )}
             
             <div className="grid grid-cols-2 gap-3">
               <Button 
