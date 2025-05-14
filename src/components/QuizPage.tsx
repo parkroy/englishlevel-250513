@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '../components/ui/button';
 import { Question } from '../data/types';
 import { useToast } from '../hooks/use-toast';
+import { Timer } from 'lucide-react';
 
 interface QuizPageProps {
   questions: Question[];
@@ -105,11 +106,11 @@ const QuizPage: React.FC<QuizPageProps> = ({ questions, onComplete }) => {
         )}
         
         <div className="flex justify-between items-center mb-4">
-          <p className="font-medium text-gray-700">질문 {currentQuestionIndex + 1}/{questions.length}</p>
+          <p className="font-medium text-gray-700">문제 {currentQuestionIndex + 1}/{questions.length}</p>
           {timerActive && (
             <div className="flex items-center">
               <div 
-                className={`h-6 w-6 flex items-center justify-center rounded-full text-white mr-1 transition-colors duration-300 ${getTimerColor()}`}
+                className={`flex h-6 w-6 items-center justify-center rounded-full text-white mr-1 transition-colors duration-300 ${getTimerColor()}`}
               >
                 <span className="text-sm">{timeLeft}</span>
               </div>
@@ -117,7 +118,17 @@ const QuizPage: React.FC<QuizPageProps> = ({ questions, onComplete }) => {
             </div>
           )}
           <Button variant="ghost" size="sm" onClick={toggleTimer} className="text-sm">
-            {timerActive ? "타이머 끄기" : "타이머 켜기"}
+            {timerActive ? (
+              <span className="flex items-center">
+                <Timer className="h-4 w-4 mr-1" />
+                타이머 끄기
+              </span>
+            ) : (
+              <span className="flex items-center">
+                <Timer className="h-4 w-4 mr-1" />
+                타이머 켜기
+              </span>
+            )}
           </Button>
         </div>
         
@@ -181,7 +192,7 @@ const QuizPage: React.FC<QuizPageProps> = ({ questions, onComplete }) => {
             onClick={handleSkip}
             className="text-blue-600 hover:text-blue-700 hover:bg-blue-50 transition-colors"
           >
-            이 질문 건너뛰기
+            이 문제 건너뛰기
           </Button>
         </div>
       </div>
