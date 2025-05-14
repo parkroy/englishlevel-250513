@@ -9,7 +9,60 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      app_metrics: {
+        Row: {
+          created_at: string
+          id: number
+          updated_at: string
+          user_count: number
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          updated_at?: string
+          user_count?: number
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          updated_at?: string
+          user_count?: number
+        }
+        Relationships: []
+      }
+      users: {
+        Row: {
+          calculated_age_level: number | null
+          created_at: string
+          email: string
+          id: string
+          last_score: number | null
+          name: string | null
+          self_assessed_level: string | null
+          updated_at: string
+        }
+        Insert: {
+          calculated_age_level?: number | null
+          created_at?: string
+          email: string
+          id?: string
+          last_score?: number | null
+          name?: string | null
+          self_assessed_level?: string | null
+          updated_at?: string
+        }
+        Update: {
+          calculated_age_level?: number | null
+          created_at?: string
+          email?: string
+          id?: string
+          last_score?: number | null
+          name?: string | null
+          self_assessed_level?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

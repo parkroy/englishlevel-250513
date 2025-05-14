@@ -8,9 +8,29 @@ import { User, QuizAttempt, Question } from '../data/types';
 import { getRandomQuestions, getResultLevel, getMockAnalysis, badges } from '../data/mockData';
 import { supabase } from '../integrations/supabase/client';
 import { useToast } from '../hooks/use-toast';
+import { Button } from '../components/ui/button';
 
 // App state type
 type AppState = 'start' | 'quiz' | 'userInfo' | 'result' | 'error';
+
+// Types for Supabase tables
+type AppMetricsRow = {
+  id: number;
+  user_count: number;
+  created_at: string;
+  updated_at: string;
+};
+
+type UsersRow = {
+  id: string;
+  email: string;
+  name: string | null;
+  self_assessed_level: string | null;
+  last_score: number | null;
+  calculated_age_level: number | null;
+  created_at: string;
+  updated_at: string;
+};
 
 const Index = () => {
   // App state
@@ -32,9 +52,11 @@ const Index = () => {
   useEffect(() => {
     const fetchUserCount = async () => {
       try {
+        // Use type assertion to fix TypeScript error
         const { data, error } = await supabase
           .from('app_metrics')
-          .select('user_count')
+          .select('*')
+          .eq('id', 1)
           .single();
         
         if (error) {
@@ -43,8 +65,10 @@ const Index = () => {
           return;
         }
         
-        if (data && data.user_count) {
-          setUserCount(data.user_count);
+        if (data) {
+          // Use type assertion to help TypeScript understand the structure
+          const metricsData = data as unknown as AppMetricsRow;
+          setUserCount(metricsData.user_count);
         }
       } catch (error) {
         console.error('Failed to fetch user count:', error);
@@ -167,7 +191,7 @@ const Index = () => {
       
       // Save user data to Supabase
       try {
-        // Try to save user data
+        // Try to save user data using type assertion
         const { error: userError } = await supabase
           .from('users')
           .upsert({
@@ -176,17 +200,17 @@ const Index = () => {
             self_assessed_level: selfAssessedLevel,
             last_score: quizScore,
             calculated_age_level: resultLevel.age_level
-          });
+          } as unknown as UsersRow);
         
         if (userError) {
           console.error('Error saving user data:', userError);
           // We'll continue even if saving fails
         }
         
-        // Increment user count
+        // Increment user count using type assertion
         const { error: countError } = await supabase
           .from('app_metrics')
-          .update({ user_count: userCount + 1 })
+          .update({ user_count: userCount + 1 } as unknown as AppMetricsRow)
           .eq('id', 1);
         
         if (countError) {
@@ -310,6 +334,3 @@ const Index = () => {
 };
 
 export default Index;
-
-// Add Button import to fix error
-import { Button } from '../components/ui/button';
