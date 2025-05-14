@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from '../components/ui/button';
 import { Question } from '../data/types';
@@ -85,10 +84,8 @@ const QuizPage: React.FC<QuizPageProps> = ({ questions, onComplete }) => {
       return 'animate-pulse bg-red-500';
     }
     if (timeLeft <= 10) {
-      // Calculate a gradient from yellow to red as time decreases from 10 to 0
-      const redIntensity = 255; // Red stays at 255
-      const greenIntensity = Math.round((timeLeft / 10) * 255); // Green goes from 255 to 0
-      return `bg-[rgb(${redIntensity},${greenIntensity},0)]`;
+      // Fixed yellow-orange for 6-10 seconds
+      return 'bg-yellow-500';
     }
     return 'bg-primary'; // Default color (primary)
   };

@@ -1,4 +1,3 @@
-
 import { Question, ResultLevel, Badge } from './types';
 
 export const questions: Question[] = [
@@ -144,31 +143,157 @@ export const questions: Question[] = [
   },
   {
     id: "q11",
-    question_text: "We ___ to the beach last weekend.",
+    question_text: "다음 중 올바른 시제를 고르세요: '그들은 3년 동안 이곳에서 _____.'",
     options: [
-      "A) go",
-      "B) went",
-      "C) are going",
-      "D) will go"
-    ],
-    correct_option_index: 1,
-    difficulty: 2,
-    category: "문법-시제",
-    explanation: "과거 시제는 'went'를 사용합니다."
-  },
-  {
-    id: "q12",
-    question_text: "They ___ dinner when the phone rang.",
-    options: [
-      "A) eat",
-      "B) ate",
-      "C) were eating",
-      "D) will eat"
+      "A) 일하다.",
+      "B) 일했다.",
+      "C) 일해 왔다.",
+      "D) 일할 것이다."
     ],
     correct_option_index: 2,
     difficulty: 2,
-    category: "문법-시제",
-    explanation: "과거 진행형으로 'were eating'을 사용합니다."
+    category: "문법-현재완료",
+    explanation: "지속을 나타내는 현재완료 시제(have been working)가 적절합니다."
+  },
+  {
+    id: "q12",
+    question_text: "다음 중 가정법 과거의 올바른 형태는?",
+    options: [
+      "A) If I am rich, I will buy a house.",
+      "B) If I was rich, I will buy a house.",
+      "C) If I were rich, I would buy a house.",
+      "D) If I were rich, I will buy a house."
+    ],
+    correct_option_index: 2,
+    difficulty: 2,
+    category: "문법-가정법",
+    explanation: "가정법 과거는 'If + 과거형태(were), 주절 would + 동사원형' 구조입니다."
+  },
+  {
+    id: "q13",
+    question_text: "다음 문장의 밑줄 친 부분을 능동태로 바꾸시오: 'The book was written by Mark Twain.'",
+    options: [
+      "A) Mark Twain writes the book.",
+      "B) Mark Twain wrote the book.",
+      "C) Mark Twain was writing the book.",
+      "D) Mark Twain has written the book."
+    ],
+    correct_option_index: 1,
+    difficulty: 2,
+    category: "문법-수동태",
+    explanation: "과거 시제 수동태(was written)는 능동태에서 과거 시제(wrote)로 변환됩니다."
+  },
+  {
+    id: "q14",
+    question_text: "다음 대화에서 적절한 응답을 고르세요: 'I'm afraid I've broken your vase.' - '_____'",
+    options: [
+      "A) Don't worry. It doesn't matter.",
+      "B) Yes, you're right.",
+      "C) No, I don't think so.",
+      "D) I'm afraid too."
+    ],
+    correct_option_index: 0,
+    difficulty: 2,
+    category: "어휘-대화표현",
+    explanation: "사과에 대한 적절한 응답으로 걱정하지 말라는 표현이 자연스럽습니다."
+  },
+  {
+    id: "q15",
+    question_text: "다음 문장에서 'call off'의 의미로 가장 적절한 것은? 'The meeting was called off due to bad weather.'",
+    options: [
+      "A) 연기하다",
+      "B) 취소하다",
+      "C) 시작하다",
+      "D) 마치다"
+    ],
+    correct_option_index: 1,
+    difficulty: 2,
+    category: "어휘-구동사",
+    explanation: "'call off'는 '취소하다'를 의미합니다."
+  },
+  {
+    id: "q16",
+    question_text: "주어진 문맥에서 빈칸에 가장 적절한 것은? 'Despite _____ very tired, she continued working.'",
+    options: [
+      "A) being",
+      "B) she was",
+      "C) to be",
+      "D) is"
+    ],
+    correct_option_index: 0,
+    difficulty: 3,
+    category: "문법-분사구문",
+    explanation: "Despite 다음에는 명사절이 와야 하므로 동명사(being)가 적절합니다."
+  },
+  {
+    id: "q17",
+    question_text: "다음 문장의 관계대명사를 찾으시오: 'The woman who spoke at the conference is a renowned scientist.'",
+    options: [
+      "A) The",
+      "B) woman",
+      "C) who",
+      "D) spoke"
+    ],
+    correct_option_index: 2,
+    difficulty: 2,
+    category: "문법-관계절",
+    explanation: "관계대명사 'who'는 선행사 'woman'을 수식하는 관계절을 이끕니다."
+  },
+  {
+    id: "q18",
+    question_text: "다음 중 비교급과 최상급이 모두 올바른 것은?",
+    options: [
+      "A) good - better - goodest",
+      "B) bad - worse - worst",
+      "C) happy - happier - happyest",
+      "D) interesting - more interesting - most interestinger"
+    ],
+    correct_option_index: 1,
+    difficulty: 2,
+    category: "문법-비교급",
+    explanation: "bad의 비교급은 worse, 최상급은 worst입니다."
+  },
+  {
+    id: "q19",
+    question_text: "Which of the following contains a gerund? A) I enjoy singing. B) I want to sing. C) I am singing. D) I sang.",
+    options: [
+      "A) I enjoy singing.",
+      "B) I want to sing.",
+      "C) I am singing.",
+      "D) I sang."
+    ],
+    correct_option_index: 0,
+    difficulty: 3,
+    category: "문법-동명사",
+    explanation: "'singing'은 동명사로 'enjoy'의 목적어로 사용되었습니다."
+  },
+  {
+    id: "q20",
+    question_text: "다음 문장에서 화자의 의도로 가장 적절한 것은? 'You might want to reconsider your decision.'",
+    options: [
+      "A) 명령",
+      "B) 제안",
+      "C) 약속",
+      "D) 예측"
+    ],
+    correct_option_index: 1,
+    difficulty: 3,
+    category: "어휘-화용론",
+    explanation: "이 표현은 직접적인 명령이 아닌 공손한 제안을 나타냅니다."
+  },
+  {
+    id: "q21",
+    question_text: "다음 문장에서 올바른 강조구문은? 'John met Mary yesterday.'",
+    options: [
+      "A) It was John who met Mary yesterday.",
+      "B) It was John whom met Mary yesterday.",
+      "C) It is John who met Mary yesterday.",
+      "D) It was John which met Mary yesterday."
+    ],
+    correct_option_index: 0,
+    difficulty: 3,
+    category: "문법-강조구문",
+    explanation: "주어 강조구문은 'It was [강조할 말] who/that...'의 형태를 취합니다."
   }
 ];
 
@@ -208,7 +333,7 @@ export const resultLevels: ResultLevel[] = [
     age_level: 13,
     level_name: "잉글리시 어드벤처러",
     title: "당신의 영어는 미국인 {}세 수준!",
-    description: "영어로 자신을 표현하는 능력이 크게 향상되었어요! 일상 대화에 필요한 문법과 어휘를 갖추고 있으며, 자신의 의견과 감정을 전달할 수 있습니다. 자연스러운 표현과 관용어 사용이 늘어나면 더욱 발전할 거예요.",
+    description: "영어로 자신을 표현하는 능력이 크게 향상되었어요! 일상 대화에 필요한 문법과 어휘를 갖추고 있으며, 자신의 의견과 감정을 전달할 수 있습니다. 자연스러운 표���과 관용어 사용이 늘어나면 더욱 발전할 거예요.",
     weakness_summary: "복잡한 문법과 관용적 표현, 비즈니스 영어에 약점이 있습니다.",
     tips: [
       "영어 시트콤이나 영화 자막 없이 도전해보기",
